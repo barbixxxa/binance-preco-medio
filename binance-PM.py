@@ -4,12 +4,24 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "cripto", help="Nome da criptomoeda a ser calculada. Ex: BTC")
+parser.add_argument(
+    "planilha_cripto", help="Nome da planilha contendo os dados de histórico de transações da criptomoeda. Ex: historico_btc.csv")
+parser.add_argument("--planilhaUSDT", dest="planilhaUSDT",
+                    help="Nome da planilha contendo os dados de histórico de transações USDT. Ex: historico_usdt.csv")
+parser.add_argument("--planilhaLTC", dest="planilhaLTC",
+                    help="Nome da planilha contendo os dados de histórico de transações LTC. Ex: historico_ltc.csv")
+parser.add_argument("--planilhaBTC", dest="planilhaBTC",
+                    help="Nome da planilha contendo os dados de histórico de transações BTC. Ex: historico_btc.csv")
+
 args = parser.parse_args()
 
-planilha_LTC = pd.read_csv('output-ltc-PM.csv')
-planilha_USDT = pd.read_csv('output-usdt-PM.csv')
-planilha_BTC = pd.read_csv('output-btc-PM.csv')
-planilha_cripto_analisada = pd.read_csv('criptomoedas-ETH.csv')
+if args.planilhaUSDT:
+    planilha_USDT = pd.read_csv(args.planilhaUSDT)
+if args.planilhaLTC:
+    planilha_LTC = pd.read_csv(args.planilhaLTC)
+if args.planilhaBTC:
+    planilha_BTC = pd.read_csv(args.planilhaBTC)
+planilha_cripto_analisada = pd.read_csv(args.planilha_cripto)
 
 
 class criptomoeda:  # classe cripto para iniciar com PM e QTD como 0
